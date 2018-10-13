@@ -1,0 +1,33 @@
+image: sagar6210/base-java-git-azurecli-terraform-python:v1.0.0
+
+variables:
+  gitlab_version: "3.0.3"
+stages:
+  - plan
+  - apply
+  - destroy
+
+TerraformPlanner:
+  stage: plan
+  when: manual
+  script:
+    - "chmod 777 scripts/setup.sh; ./scripts/setup.sh plan"
+  tags:
+    - azure-build
+
+TerraformCreator:
+  stage: apply
+  when: manual
+  script:
+    - "chmod 777 scripts/setup.sh; ./scripts/setup.sh apply"
+  tags:
+    - azure-build
+
+TerraformDestroyer:
+  stage: destroy
+  when: manual
+  script:
+    - "chmod 777 scripts/setup.sh; ./scripts/setup.sh destroy"
+  tags:
+    - azure-build
+
